@@ -1,6 +1,6 @@
 # Twitter Clone
 
-Un clone de Twitter construit avec Next.js, MongoDB et TailwindCSS.
+Un clone de Twitter construit avec Next.js, MongoDB et TailwindCSS en full Vibe Coding.
 
 ## Prérequis
 
