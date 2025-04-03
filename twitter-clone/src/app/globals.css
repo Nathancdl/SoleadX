@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 245, 245, 245;
+  --background-end-rgb: 255, 255, 255;
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 20, 20, 20;
+  --background-end-rgb: 0, 0, 0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Améliorer la lisibilité - mode clair */
+.text-gray-500 {
+  color: #666;
+}
+
+.text-gray-400 {
+  color: #777;
+}
+
+.text-gray-800 {
+  color: #333;
+}
+
+/* Mode sombre - surcharges pour le texte */
+.dark .text-gray-500 {
+  color: #aaa !important;
+}
+
+.dark .text-gray-400 {
+  color: #999 !important;
+}
+
+.dark .text-gray-800 {
+  color: #eee !important;
+}
+
+/* Mode clair */
+.bg-white {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Transition pour tous les éléments */
+* {
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Mode sombre - fond pour les cartes et conteneurs */
+.dark .bg-white {
+  background-color: #1f2937;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+/* Style pour les boutons d'action des tweets */
+.tweet-action {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s;
+  padding: 0.5rem;
+  border-radius: 999px;
+}
+
+/* Hover pour les boutons d'action - mode clair */
+.tweet-action:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Hover pour les boutons d'action - mode sombre */
+.dark .tweet-action:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* États spéciaux des boutons d'action */
+.tweet-action.liked span:first-child {
+  color: rgb(220, 38, 38);
+}
+
+.tweet-action.retweeted span:first-child {
+  color: rgb(16, 185, 129);
+}
+
+.liked {
+  color: #e0245e !important;
+}
+
+.retweeted {
+  color: #17bf63 !important;
+}
+
+/* Styles pour les débordements de texte */
+.text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Animations pour les interactions */
+@keyframes like-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.tweet-action.liked span:first-child,
+.tweet-action.retweeted span:first-child {
+  animation: like-bounce 0.4s ease-in-out;
+}
+
+/* Styles spécifiques au mode sombre */
+.dark .text-black {
+  color: white;
+}
+
+.dark .border-gray-200 {
+  border-color: #374151;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #374151;
+}
+
+/* Centrage du contenu */
+.main-content {
+  display: flex;
+  justify-content: center;
+}
+
+/* Media queries pour les appareils mobiles */
+@media (max-width: 640px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .mobile-hidden {
+    display: none;
+  }
+  
+  .mobile-menu {
+    display: block;
+  }
+}
+
+/* Style pour le menu burger */
+.hamburger-menu {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
+}
+
+.dark .hamburger-menu {
+  background-color: #1f2937;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed;
+    height: 100vh;
+    z-index: 40;
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .hamburger-menu {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+}
